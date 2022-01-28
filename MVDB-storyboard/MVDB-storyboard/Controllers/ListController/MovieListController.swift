@@ -1,5 +1,5 @@
 //
-//  ListController.swift
+//  MovieListController.swift
 //  MVDB-storyboard
 //
 //  Created by Fedii Ihor on 28.01.2022.
@@ -7,7 +7,14 @@
 
 import UIKit
 
-class ListController: UIViewController {
+class MovieListController: UIViewController {
+    
+    private var nowPlaying: [Movie]?
+    private var upcoming: [Movie]?
+    private var topRated: [Movie]?
+    private var popular: [Movie]?
+    
+    private var datasource: [MovieListEndPoint] = [.nowPlaying,.popular,.topRated, .upcoming]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,7 +38,7 @@ class ListController: UIViewController {
 
 }
 
-extension ListController: UITableViewDataSource {
+extension MovieListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
@@ -39,11 +46,11 @@ extension ListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: PCell.id, for: indexPath) as! PCell
-            cell.setupCollectionView()
+            cell.setupCollectionView(with: datasource[indexPath.row])
             return cell
         }else{
         let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.id, for: indexPath) as! ListCell
-        cell.setupCollectionView()
+            cell.setupCollectionView(with: datasource[indexPath.row])
             return cell
         }
     }
@@ -59,6 +66,8 @@ extension ListController: UITableViewDataSource {
     
 }
 
-extension ListController: UITableViewDelegate {
-    
+extension MovieListController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PortraitCell: UICollectionViewCell {
     
@@ -17,14 +18,18 @@ class PortraitCell: UICollectionViewCell {
     
     @IBOutlet weak var previewImageView: UIImageView!
     
-    @IBOutlet weak var nameLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
     
     }
     
-    func setupCell() {
+    func setupCell(with movie: Movie) {
+        
+        let url = movie.posterURL
+        let placeholder = UIImage(systemName: "photo")
+        previewImageView.sd_setImage(with: url, placeholderImage: placeholder)
+     
         previewImageView.layer.cornerRadius = 10
         previewImageView.layer.shadowRadius = 5
     }
