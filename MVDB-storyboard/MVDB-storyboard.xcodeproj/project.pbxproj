@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		3F09BCF0BB034A26D323F7D8 /* Pods_MVDB_storyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BD9221869BE4B3C97A96FD /* Pods_MVDB_storyboard.framework */; };
 		BD2922A527A9C4CD0094BF92 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2922A427A9C4CD0094BF92 /* DetailViewController.swift */; };
+		BD69ABE727AAFD5A00B89888 /* movie_info.json in Resources */ = {isa = PBXBuildFile; fileRef = BD69ABE427AAFD5A00B89888 /* movie_info.json */; };
+		BD69ABE827AAFD5A00B89888 /* movie_list.json in Resources */ = {isa = PBXBuildFile; fileRef = BD69ABE527AAFD5A00B89888 /* movie_list.json */; };
+		BD69ABE927AAFD5A00B89888 /* search_movie.json in Resources */ = {isa = PBXBuildFile; fileRef = BD69ABE627AAFD5A00B89888 /* search_movie.json */; };
+		BD69ABEE27AB0EA700B89888 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD69ABEC27AB0EA700B89888 /* DetailCell.swift */; };
+		BD69ABEF27AB0EA700B89888 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD69ABED27AB0EA700B89888 /* DetailCell.xib */; };
 		BD70B7B827A3EE3A001BDB14 /* MovieListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD70B7B727A3EE3A001BDB14 /* MovieListController.swift */; };
 		BD70B7BD27A3F1C7001BDB14 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD70B7BB27A3F1C7001BDB14 /* ListCell.swift */; };
 		BD70B7BE27A3F1C7001BDB14 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD70B7BC27A3F1C7001BDB14 /* ListCell.xib */; };
@@ -34,6 +39,11 @@
 /* Begin PBXFileReference section */
 		A0BD9221869BE4B3C97A96FD /* Pods_MVDB_storyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVDB_storyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD2922A427A9C4CD0094BF92 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		BD69ABE427AAFD5A00B89888 /* movie_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_info.json; sourceTree = "<group>"; };
+		BD69ABE527AAFD5A00B89888 /* movie_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_list.json; sourceTree = "<group>"; };
+		BD69ABE627AAFD5A00B89888 /* search_movie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = search_movie.json; sourceTree = "<group>"; };
+		BD69ABEC27AB0EA700B89888 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		BD69ABED27AB0EA700B89888 /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
 		BD70B7B727A3EE3A001BDB14 /* MovieListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListController.swift; sourceTree = "<group>"; };
 		BD70B7BB27A3F1C7001BDB14 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		BD70B7BC27A3F1C7001BDB14 /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
@@ -79,6 +89,34 @@
 				FBBF437B416CBDE0A423CE7D /* Pods-MVDB-storyboard.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BD69ABE327AAFD2200B89888 /* jsonResourses */ = {
+			isa = PBXGroup;
+			children = (
+				BD69ABE427AAFD5A00B89888 /* movie_info.json */,
+				BD69ABE527AAFD5A00B89888 /* movie_list.json */,
+				BD69ABE627AAFD5A00B89888 /* search_movie.json */,
+			);
+			path = jsonResourses;
+			sourceTree = "<group>";
+		};
+		BD69ABEA27AB0E5500B89888 /* DetailController */ = {
+			isa = PBXGroup;
+			children = (
+				BD69ABEB27AB0E7500B89888 /* DetailCell */,
+				BD2922A427A9C4CD0094BF92 /* DetailViewController.swift */,
+			);
+			path = DetailController;
+			sourceTree = "<group>";
+		};
+		BD69ABEB27AB0E7500B89888 /* DetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				BD69ABEC27AB0EA700B89888 /* DetailCell.swift */,
+				BD69ABED27AB0EA700B89888 /* DetailCell.xib */,
+			);
+			path = DetailCell;
 			sourceTree = "<group>";
 		};
 		BD70B7B927A3F1A3001BDB14 /* ListController */ = {
@@ -187,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				BD70B7D327A41C70001BDB14 /* Application */,
+				BD69ABE327AAFD2200B89888 /* jsonResourses */,
 				BD70B7D027A41BE5001BDB14 /* Utils */,
 				BD70B7C527A41A46001BDB14 /* Network */,
 				BD86E18827A2DC1500E25EBA /* Controllers */,
@@ -199,7 +238,7 @@
 		BD86E18827A2DC1500E25EBA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BD2922A427A9C4CD0094BF92 /* DetailViewController.swift */,
+				BD69ABEA27AB0E5500B89888 /* DetailController */,
 				BD70B7B927A3F1A3001BDB14 /* ListController */,
 			);
 			path = Controllers;
@@ -300,12 +339,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD69ABEF27AB0EA700B89888 /* DetailCell.xib in Resources */,
 				BD86E18127A2DAA200E25EBA /* LaunchScreen.storyboard in Resources */,
 				BD70B7C427A3FA46001BDB14 /* PCell.xib in Resources */,
+				BD69ABE727AAFD5A00B89888 /* movie_info.json in Resources */,
 				BD70B7BE27A3F1C7001BDB14 /* ListCell.xib in Resources */,
+				BD69ABE827AAFD5A00B89888 /* movie_list.json in Resources */,
 				BD86E17E27A2DAA200E25EBA /* Assets.xcassets in Resources */,
 				BD86E19027A2DCC400E25EBA /* WideCell.xib in Resources */,
 				BD86E17C27A2DAA100E25EBA /* Main.storyboard in Resources */,
+				BD69ABE927AAFD5A00B89888 /* search_movie.json in Resources */,
 				BD86E19427A2DCDC00E25EBA /* PortraitCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,6 +407,7 @@
 				BD70B7CA27A41AB1001BDB14 /* Movie+Stubs.swift in Sources */,
 				BD70B7D927A42B07001BDB14 /* CellProtocols.swift in Sources */,
 				BD70B7C827A41A8A001BDB14 /* Movie.swift in Sources */,
+				BD69ABEE27AB0EA700B89888 /* DetailCell.swift in Sources */,
 				BD70B7D227A41C10001BDB14 /* Utils.swift in Sources */,
 				BD86E17527A2DAA100E25EBA /* AppDelegate.swift in Sources */,
 				BD70B7CF27A41B1F001BDB14 /* MovieServises.swift in Sources */,
