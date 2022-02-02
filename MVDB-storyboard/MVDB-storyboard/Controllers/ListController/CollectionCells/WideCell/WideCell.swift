@@ -10,6 +10,8 @@ import SDWebImage
 
 class WideCell: UICollectionViewCell {
     
+ 
+    
     static var id = "WideCell"
     static func nib() -> UINib {
         return UINib(nibName: self.id, bundle: nil)

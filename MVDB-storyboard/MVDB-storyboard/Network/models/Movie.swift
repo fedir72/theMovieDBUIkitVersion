@@ -17,7 +17,7 @@ struct Movie: Decodable, Identifiable {
     let voteAverage: Double
     let voteCount: Int
     let runtime: Int?
-    // let releaseDate: String?
+    let releaseDate: String?
     
     //MARK: - урл к картинкам
     var backdropURL: URL {

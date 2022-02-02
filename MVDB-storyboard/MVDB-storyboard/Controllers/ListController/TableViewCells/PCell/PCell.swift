@@ -6,8 +6,11 @@
 //
 
 import UIKit
+
 class PCell: UITableViewCell, MovieCellProtocol  {
     
+    
+    weak var delegate: CollectionCellDelegate?
     
     static let id = "PCell"
     static func nib() -> UINib {
@@ -25,7 +28,6 @@ class PCell: UITableViewCell, MovieCellProtocol  {
             MovieStore.shared.fetchMovies(from: endpoint) { result in
                 switch result {
                 case .success(let value):
-                    print(value)
                     self.movieData = value.results
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -36,16 +38,7 @@ class PCell: UITableViewCell, MovieCellProtocol  {
     
     @IBOutlet weak var sectionCaseLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
-    
+ 
     func setupCollectionView(with endpoint: MovieListEndPoint) {
         self.sectionCaseLabel.text = endpoint.description
         self.endpoint = endpoint
@@ -70,18 +63,34 @@ extension PCell: UICollectionViewDataSource {
     }
 }
 
+//MARK: - UICollectionViewDelegate ,  UICollectionViewDelegateFlowLayout
 extension PCell: UICollectionViewDelegate ,  UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        print(movieData[indexPath.item].id)
+        let movieID = movieData[indexPath.item].id
+        
+        MovieStore.shared.fetchMovie(id: movieID) { result in
+            switch result {
+                
+            case .success(let movieDetail):
+                print(movieDetail)
+                self.delegate?.showDetailVC(with: movieDetail)
+            case .failure(let error):
+                print(error.errorUserInfo)
+            }
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let h = self.collectionView.frame.height - 4
-        let v = h/1.6
+        let v = h/1.5
         return CGSize(width: v, height:  h )
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: 0, left: 15, bottom: 0, right: 15)
     }
 }
+
+

@@ -9,6 +9,9 @@ import UIKit
 
 class ListCell: UITableViewCell, MovieCellProtocol {
     
+    
+    weak var delegate: CollectionCellDelegate?
+    
     static let id = "ListCell"
     static func nib() -> UINib {
         return UINib(nibName: self.id, bundle: nil)
@@ -24,7 +27,6 @@ class ListCell: UITableViewCell, MovieCellProtocol {
             MovieStore.shared.fetchMovies(from: endpoint) { result in
                 switch result {
                 case .success(let value):
-                    print(value)
                     self.movieData = value.results
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -35,15 +37,6 @@ class ListCell: UITableViewCell, MovieCellProtocol {
     
     @IBOutlet weak var sectionCaseLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
     
     func setupCollectionView(with endpoint: MovieListEndPoint) {
         self.sectionCaseLabel.text = endpoint.description
@@ -73,7 +66,20 @@ extension ListCell: UICollectionViewDataSource {
 
 extension ListCell: UICollectionViewDelegate ,  UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        print(movieData[indexPath.item])
+        
+        let movieID = movieData[indexPath.item].id
+        
+        MovieStore.shared.fetchMovie(id: movieID) { result in
+            switch result {
+                
+            case .success(let movieDetail):
+                print("movieDetail",movieDetail)
+                self.delegate?.showDetailVC(with: movieDetail)
+            case .failure(let error):
+                print(error.errorUserInfo)
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -9,13 +9,12 @@ import UIKit
 
 class MovieListController: UIViewController {
     
-    private var nowPlaying: [Movie]?
-    private var upcoming: [Movie]?
-    private var topRated: [Movie]?
-    private var popular: [Movie]?
+//    private var nowPlaying: [Movie]?
+//    private var upcoming: [Movie]?
+//    private var topRated: [Movie]?
+//    private var popular: [Movie]?
     
     private var datasource: [MovieListEndPoint] = [.nowPlaying,.popular,.topRated, .upcoming]
-    
     @IBOutlet weak var tableView: UITableView!
     
 
@@ -25,7 +24,7 @@ class MovieListController: UIViewController {
         setupTable()
     }
     
-    
+//MARK: - setupTable()
     private func setupTable() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -44,12 +43,15 @@ extension MovieListController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: PCell.id, for: indexPath) as! PCell
             cell.setupCollectionView(with: datasource[indexPath.row])
+            cell.delegate = self
             return cell
         }else{
         let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.id, for: indexPath) as! ListCell
+            cell.delegate = self
             cell.setupCollectionView(with: datasource[indexPath.row])
             return cell
         }
@@ -69,5 +71,15 @@ extension MovieListController: UITableViewDataSource {
 extension MovieListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension MovieListController: CollectionCellDelegate {
+    func showDetailVC(with movie: Movie) {
+        
+        print("show detail")
+        let vc = storyboard?.instantiateViewController(withIdentifier: DetailViewController.id) as! DetailViewController
+        vc.movie = movie
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
