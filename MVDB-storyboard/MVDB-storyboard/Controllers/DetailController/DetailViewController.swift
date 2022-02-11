@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import SafariServices
 import SDWebImage
 import SnapKit
 
 class DetailViewController: UITableViewController {
     
     static let id = "DetailViewController"
+    
     var movie: Movie?
     private var videos = [MovieVideo]() {
         didSet {
@@ -57,8 +59,8 @@ class DetailViewController: UITableViewController {
         self.titleLabel.text = movie.title
         self.overviewLabel.text = movie.overview
         self.posterView.layer.cornerRadius = 10
-        let dateText = String(movie.releaseDate?.split(separator: "-").first ?? "not found")
         
+        let dateText = String(movie.releaseDate?.split(separator: "-").first ?? "not found")
         let time = movie.runtime ?? 0
         let genre = movie.genreText
         let timeText = "\(genre)・\(dateText)・ \(time/60) hour, \(time%60) minutes"
@@ -106,6 +108,12 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+        
+        guard let url = videos[indexPath.row].youtubeURL else {return}
+        let vc = SFSafariViewController(url: url)
+        vc.modalTransitionStyle = .coverVertical
+        present(vc, animated: true )
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

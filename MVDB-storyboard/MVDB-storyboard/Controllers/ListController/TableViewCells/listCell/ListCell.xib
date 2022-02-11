@@ -47,6 +47,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="collectionView" destination="7Kd-9b-YyX" id="U4K-xF-BrZ"/>
                 <outlet property="sectionCaseLabel" destination="ABW-R3-iJe" id="08n-fK-Kdr"/>

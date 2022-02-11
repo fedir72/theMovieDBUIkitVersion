@@ -28,7 +28,7 @@ class MovieStore: MovieService {
     }
 
     func searchMovie(query: String, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
-        guard let url = URL(string: "\(baseAPIURL)/movie") else {
+        guard let url = URL(string: "\(baseAPIURL)/search/movie") else {
             completion(.failure(.invalidEndpoint))
             return
         }
@@ -36,10 +36,22 @@ class MovieStore: MovieService {
             "language":"en-US",
             "include_adult":"false",
             "region":"US",
-            "querry":query
+            "query":query
         ], completion: completion)
     }
-
+    
+//    func searchMovie(query: String, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
+//        guard let url = URL(string: "\(baseAPIURL)/search/movie") else {
+//            completion(.failure(.invalidEndpoint))
+//            return
+//        }
+//        self.loadURlandDecode(url: url, params: [
+//            "language": "en-US",
+//            "include_adult": "false",
+//            "region": "US",
+//            "query": query
+//        ], completion: completion)
+//    }
 
     func fetchMovie(id: Int, completion: @escaping (Result<Movie, MovieError>) -> ()) {
         guard let url = URL(string: "\(baseAPIURL)/movie/\(id)") else {

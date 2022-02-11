@@ -23,15 +23,31 @@ class WideCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
+    
+   
     
     func setupCell(with movie: Movie) {
         let url = movie.backdropURL
         let placeholder = UIImage(systemName: "photo")
         previeImageView.sd_setImage(with: url, placeholderImage: placeholder)
         nameLabel.text = movie.title
-        previeImageView.layer.cornerRadius = 10
-        previeImageView.layer.shadowRadius = 15
-        previeImageView.layer.shadowColor = .init(gray: 0.3, alpha: 1)
+        
+        let cornerradius: CGFloat = 10
+        
+        previeImageView.layer.shadowColor = UIColor.gray.cgColor
+        previeImageView.layer.cornerRadius = cornerradius
+        //previeImageView.layer.shadowRadius = 5.0
+        //previeImageView.layer.shadowOpacity = 0.7
+        //previeImageView.layer.shadowOffset = .init(width: 5, height: 5)
+        
+        previeImageView.clipsToBounds =  true
+        
+//        let cgPath =  UIBezierPath(roundedRect: previeImageView.bounds,
+//                                   byRoundingCorners: [.allCorners],
+//                                   cornerRadii: CGSize(width: cornerradius, height: cornerradius)).cgPath
+//        previeImageView.layer.shadowPath = cgPath
+    
     }
 }
